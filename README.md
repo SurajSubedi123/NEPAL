@@ -1,77 +1,39 @@
-import turtle
-import random
+# Turtle Game
 
-# Set up the screen
+This is a simple Python game created using the Turtle module. In this game, you control a blue turtle and navigate it through obstacles to collect yellow coins.
 
-screen = turtle.Screen()
-screen.setup(width=600, height=600)
-screen.title("Turtle Game")
-screen.bgcolor("white")
+## Gameplay
 
-# Create the player turtle
+- The player turtle (blue) can be controlled using the arrow keys (Up, Down, Left, Right) to move up, down, left, and right respectively.
+- The objective is to collect the yellow coins while avoiding collisions with red obstacles.
+- Each time the player collects a coin, a new coin will appear at a random location on the screen.
+- Colliding with an obstacle will reset the player's position to the center of the screen.
 
-player = turtle.Turtle()
-player.shape("turtle")
-player.color("blue")
-player.penup()
-player.speed(0)
+## How to Run
 
-#Creating the coin
+1. Make sure you have Python installed on your system.
+2. Clone or download this repository to your local machine.
+3. Open a terminal or command prompt and navigate to the directory containing the Python script.
+4. Run the Python script using the command: `python turtle_game.py`.
 
-coin = turtle.Turtle()
-coin.shape("circle")
-coin.color("yellow")
-coin.penup()
-coin.speed(0)
-coin.goto(random.randint(-290, 290), random.randint(-290, 290))
+## Controls
 
-# Create the obstacles
+- Use the arrow keys on your keyboard to control the player turtle:
+  - Up arrow: Move up
+  - Down arrow: Move down
+  - Left arrow: Move left
+  - Right arrow: Move right
 
-obstacles = []
-for _ in range(5):
-    obstacle = turtle.Turtle()
-    obstacle.shape("square")
-    obstacle.color("red")
-    obstacle.penup()
-    obstacle.speed(0)
-    obstacle.goto(random.randint(-290, 290), random.randint(-290, 290))
-    obstacles.append(obstacle)
+## Requirements
 
-# Function to move the player
-def move_up():
-    y = player.ycor()
-    player.sety(y + 20)
+- Python 3.x
+- Turtle module (usually included with Python standard library)
 
-def move_down():
-    y = player.ycor()
-    player.sety(y - 20)
+## Screenshots
 
-def move_left():
-    x = player.xcor()
-    player.setx(x - 20)
+![Game Screenshot](screenshot.png)
 
-def move_right():
-    x = player.xcor()
-    player.setx(x + 20)
+## Credits
 
-# Keyboard bindings
+- This game was created by [Your Name].
 
-screen.listen()
-screen.onkeypress(move_up, "Up")
-screen.onkeypress(move_down, "Down")
-screen.onkeypress(move_left, "Left")
-screen.onkeypress(move_right, "Right")
-
-# Main game loop
-
-while True:
-    # Move the coin if player collects it
-    if player.distance(coin) < 20:
-        coin.goto(random.randint(-290, 290), random.randint(-290, 290))
-    
-    # Check for collisions with obstacles
-    for obstacle in obstacles:
-        if player.distance(obstacle) < 20:
-            player.goto(0, 0)  # Reset player position
-    
-    screen.update()
